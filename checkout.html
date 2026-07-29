@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,follow">
 <title>결제 · Stargate Edu</title>
 <style>
-:root{--navy:#0B2A4A;--navy2:#123A63;--gold:#C9A227;--ink:#1A2233;--gray:#667085;--line:#E4E7EC;--bg:#F7F9FC;--white:#fff;--ok:#16794d}
+:root{--navy:#0B2A4A;--navy2:#123A63;--gold:#C9A227;--ink:#1A2233;--gray:#667085;--line:#E4E7EC;--bg:#F7F9FC;--white:#fff;--ok:#16794d;--danger:#9c2f2b}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,'Pretendard','Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
 a{text-decoration:none}.top{background:#fff;border-bottom:1px solid var(--line)}.topin{max-width:960px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:20px;font-weight:900;color:var(--navy)}.logo b{color:var(--gold)}.back{font-size:14px;color:var(--navy);font-weight:700}
@@ -16,20 +16,19 @@ h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color
 .label{font-size:12px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.7px}.product{font-size:22px;color:var(--navy);line-height:1.35;margin:8px 0 18px}
 .rows{border-top:1px solid var(--line)}.row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.row span:first-child{color:var(--gray)}
 .total{font-size:25px;font-weight:900;color:var(--navy)}.secure{display:flex;gap:10px;align-items:flex-start;background:#eef8f3;border:1px solid #cfe8dc;color:var(--ok);padding:13px;border-radius:10px;font-size:13px;margin-bottom:18px}
-.pay{display:block;width:100%;border:0;border-radius:10px;background:var(--gold);color:#3a2e00;padding:15px;text-align:center;font-size:15px;font-weight:900;cursor:pointer}
-.pay[aria-disabled="true"]{background:#D0D5DD;color:#667085;cursor:not-allowed}.support{display:block;text-align:center;margin-top:12px;color:var(--navy);font-size:13px;font-weight:700}
-.note{font-size:12px;color:var(--gray);margin-top:16px}.pending{margin-top:14px;padding:12px;border-radius:9px;background:#fff8e6;color:#765b00;font-size:13px}.error{display:none;background:#fff;border:1px solid #f2b8b5;color:#9c2f2b;border-radius:12px;padding:22px}
+.pay{display:block;width:100%;border:0;border-radius:10px;background:#FEE500;color:#191919;padding:15px;text-align:center;font-size:15px;font-weight:900;cursor:pointer}.pay:disabled{background:#D0D5DD;color:#667085;cursor:not-allowed}.support{display:block;text-align:center;margin-top:12px;color:var(--navy);font-size:13px;font-weight:700}
+.note{font-size:12px;color:var(--gray);margin-top:16px}.status{display:none;margin-top:14px;padding:12px;border-radius:9px;font-size:13px}.status.show{display:block}.status.wait{background:#fff8e6;color:#765b00}.status.error{background:#fff;border:1px solid #f2b8b5;color:var(--danger)}.page-error{display:none;background:#fff;border:1px solid #f2b8b5;color:var(--danger);border-radius:12px;padding:22px}
 @media(max-width:720px){main{margin-top:30px}.checkout{grid-template-columns:1fr}.panel{padding:20px}}
 </style>
 </head>
 <body>
 <header class="top"><div class="topin"><a class="logo" id="homeLink" href="./">STARGATE<b>EDU</b></a><a class="back" id="backLink" href="./">← 쇼핑 계속하기</a></div></header>
 <main>
-  <div id="error" class="error"></div>
+  <div id="pageError" class="page-error"></div>
   <div id="checkoutView">
-    <div class="eyebrow" id="eyebrow">SECURE CHECKOUT</div>
+    <div class="eyebrow">KAKAOPAY SECURE CHECKOUT</div>
     <h1 id="title">주문 확인</h1>
-    <p class="lead" id="lead">상품과 금액을 확인한 후 안전한 외부 결제창으로 이동합니다.</p>
+    <p class="lead" id="lead">상품과 금액을 확인한 후 카카오페이 결제를 진행합니다.</p>
     <div class="checkout">
       <section class="panel" aria-labelledby="productName">
         <div class="label" id="summaryLabel">선택 상품</div>
@@ -42,84 +41,17 @@ h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color
         </div>
       </section>
       <aside class="panel">
-        <div class="secure"><span>🔒</span><span id="secureText">카드 정보는 결제사가 직접 처리하며 이 사이트에는 저장되지 않습니다.</span></div>
-        <a class="pay" id="payButton" href="#" aria-disabled="true">안전하게 결제하기</a>
-        <div class="pending" id="pending">현재 결제 링크 등록 단계입니다. 아래 문의 버튼으로 우선 주문할 수 있습니다.</div>
+        <div class="secure"><span>🔒</span><span id="secureText">결제 정보는 카카오페이가 직접 처리하며 이 사이트에는 저장되지 않습니다.</span></div>
+        <button class="pay" id="payButton" type="button">카카오페이로 결제하기</button>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
         <a class="support" id="supportLink" href="mailto:ceo@stargateedu.co.kr">결제·주문 문의</a>
-        <p class="note" id="note">결제를 진행하면 이용약관과 환불정책에 동의한 것으로 간주됩니다. 실물 교재는 배송비·배송 가능 지역을 결제창에서 확인하세요.</p>
+        <p class="note" id="note">결제를 진행하면 이용약관과 환불정책에 동의한 것으로 간주됩니다. 실물 교재는 배송비·배송 가능 지역을 별도로 확인해 주세요.</p>
       </aside>
     </div>
   </div>
 </main>
 <script src="./js/catalog.js"></script>
 <script src="./js/payment-config.js"></script>
-<script>
-(function(){
-  "use strict";
-  var params=new URLSearchParams(location.search);
-  var lang=params.get("lang")==="en"?"en":"ko";
-  var productId=params.get("product")||"";
-  var catalog=window.STARGATE_CATALOG||{};
-  var product=catalog[productId];
-  var payment=window.STARGATE_PAYMENT||{links:{},supportEmail:"ceo@stargateedu.co.kr"};
-  var copy={
-    ko:{title:"주문 확인",lead:"상품과 금액을 확인한 후 안전한 외부 결제창으로 이동합니다.",summary:"선택 상품",type:"상품 유형",delivery:"제공 방식",billing:"결제 주기",total:"총 결제금액",pay:"안전하게 결제하기",pending:"현재 결제 링크 등록 단계입니다. 아래 문의 버튼으로 우선 주문할 수 있습니다.",support:"결제·주문 문의",back:"← 쇼핑 계속하기",secure:"카드 정보는 결제사가 직접 처리하며 이 사이트에는 저장되지 않습니다.",note:"결제를 진행하면 이용약관과 환불정책에 동의한 것으로 간주됩니다. 실물 교재는 배송비·배송 가능 지역을 결제창에서 확인하세요.",error:"선택한 상품을 찾을 수 없습니다.",types:{course:"온라인 강의",subscription:"구독",book:"교재",live:"라이브 과정",consulting:"컨설팅"},deliveries:{digital:"디지털 제공",physical:"실물 배송",live:"실시간 온라인",in_person:"오프라인",appointment:"예약제"},billings:{one_time:"1회 결제",monthly:"매월",annual:"매년"}},
-    en:{title:"Review your order",lead:"Confirm your selection before continuing to the secure hosted checkout.",summary:"Selected product",type:"Product type",delivery:"Delivery",billing:"Billing",total:"Total",pay:"Continue to secure payment",pending:"The hosted payment link is being activated. You can place an order through support in the meantime.",support:"Payment & order support",back:"← Continue shopping",secure:"Your payment provider processes card details directly. This site never stores them.",note:"By continuing, you agree to the Terms and Refund Policy. Shipping fees and eligible destinations for printed books are confirmed at checkout.",error:"The selected product could not be found.",types:{course:"Online course",subscription:"Subscription",book:"Book",live:"Live program",consulting:"Consulting"},deliveries:{digital:"Digital access",physical:"Physical shipping",live:"Live online",in_person:"In person",appointment:"By appointment"},billings:{one_time:"One-time",monthly:"Monthly",annual:"Annual"}}
-  }[lang];
-  document.documentElement.lang=lang;
-  document.title=copy.title+" · Stargate Edu";
-  document.getElementById("title").textContent=copy.title;
-  document.getElementById("lead").textContent=copy.lead;
-  document.getElementById("summaryLabel").textContent=copy.summary;
-  document.getElementById("typeLabel").textContent=copy.type;
-  document.getElementById("deliveryLabel").textContent=copy.delivery;
-  document.getElementById("billingLabel").textContent=copy.billing;
-  document.getElementById("totalLabel").textContent=copy.total;
-  document.getElementById("payButton").textContent=copy.pay;
-  document.getElementById("pending").textContent=copy.pending;
-  document.getElementById("supportLink").textContent=copy.support;
-  document.getElementById("backLink").textContent=copy.back;
-  document.getElementById("secureText").textContent=copy.secure;
-  document.getElementById("note").textContent=copy.note;
-  var home=lang==="en"?"./en/":"./";
-  document.getElementById("homeLink").href=home;
-  document.getElementById("backLink").href=home;
-
-  if(!product){
-    document.getElementById("checkoutView").style.display="none";
-    var error=document.getElementById("error");
-    error.style.display="block";
-    error.textContent=copy.error;
-    return;
-  }
-  document.getElementById("productName").textContent=product.name[lang];
-  document.getElementById("productType").textContent=copy.types[product.type]||product.type;
-  document.getElementById("delivery").textContent=copy.deliveries[product.delivery]||product.delivery;
-  document.getElementById("billing").textContent=copy.billings[product.billing]||product.billing;
-  document.getElementById("price").textContent=new Intl.NumberFormat(lang==="en"?"en-US":"ko-KR",{style:"currency",currency:"KRW",maximumFractionDigits:0}).format(product.priceKRW);
-
-  var subject=(lang==="en"?"Order inquiry: ":"상품 주문 문의: ")+product.name[lang];
-  document.getElementById("supportLink").href="mailto:"+encodeURIComponent(payment.supportEmail||"ceo@stargateedu.co.kr")+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent("Product ID: "+productId);
-
-  var candidate=payment.links&&payment.links[productId];
-  var pay=document.getElementById("payButton");
-  if(candidate){
-    try{
-      var url=new URL(candidate);
-      if(url.protocol==="https:"){
-        pay.href=url.href;
-        pay.removeAttribute("aria-disabled");
-        document.getElementById("pending").style.display="none";
-        pay.addEventListener("click",function(){
-          if(Array.isArray(window.dataLayer)){window.dataLayer.push({event:"add_payment_info",product_id:productId,value:product.priceKRW,currency:"KRW"});}
-        });
-      }
-    }catch(e){}
-  }
-  pay.addEventListener("click",function(event){
-    if(pay.getAttribute("aria-disabled")==="true")event.preventDefault();
-  });
-})();
-</script>
+<script src="./js/kakaopay-checkout.js"></script>
 </body>
 </html>
