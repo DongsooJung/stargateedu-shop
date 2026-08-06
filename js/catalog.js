@@ -5,7 +5,7 @@
 window.STARGATE_CATALOG = Object.freeze({
   "koi-algorithms-guide": {
     name: { ko: "KOI 수상자의 25개 핵심 알고리즘 가이드", en: "25 Essential Algorithms by a KOI Award Winner" },
-    type: "book", billing: "one_time", delivery: "digital", priceKRW: 30000
+    sku: "SGE-EBOOK-KOI-25", type: "book", billing: "one_time", delivery: "digital", priceKRW: 30000
   },
   "koi-advanced": {
     name: { ko: "정보올림피아드 심화 (자료구조·알고리즘)", en: "Advanced Computing Olympiad: Data Structures & Algorithms" },
