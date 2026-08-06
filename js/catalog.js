@@ -3,6 +3,10 @@
  * Prices are display values only. The payment provider must be the source of truth.
  */
 window.STARGATE_CATALOG = Object.freeze({
+  "koi-algorithms-guide": {
+    name: { ko: "KOI 수상자의 25개 핵심 알고리즘 가이드", en: "25 Essential Algorithms by a KOI Award Winner" },
+    type: "book", billing: "one_time", delivery: "digital", priceKRW: 30000
+  },
   "koi-advanced": {
     name: { ko: "정보올림피아드 심화 (자료구조·알고리즘)", en: "Advanced Computing Olympiad: Data Structures & Algorithms" },
     type: "course", billing: "one_time", delivery: "digital", priceKRW: 429000
@@ -68,6 +72,6 @@ window.STARGATE_CATALOG = Object.freeze({
 window.STARGATE_PRODUCT_ORDER = Object.freeze({
   courses: ["koi-advanced", "algorithms-bundle", "kmo-number-comb", "koi-cpp-beginner"],
   sub: ["problem-bank-monthly", "problem-bank-annual", "mock-exam-monthly"],
-  books: ["koi-beginner-textbook", "algorithms-workbook-1", "koi-past-papers", "algorithms-ebook-set"],
+  books: ["koi-algorithms-guide", "koi-beginner-textbook", "algorithms-workbook-1", "koi-past-papers"],
   live: ["vacation-live-intensive", "koi-final-camp", "strategy-consulting", "ongoing-mentoring"]
 });

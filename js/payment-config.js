@@ -9,6 +9,7 @@ window.STARGATE_PAYMENT = Object.freeze({
   successUrl: "https://shop.stargateedu.co.kr/success.html",
   cancelUrl: "https://shop.stargateedu.co.kr/cancel.html",
   links: Object.freeze({
+    "koi-algorithms-guide": "",
     "koi-advanced": "",
     "algorithms-bundle": "",
     "kmo-number-comb": "",
