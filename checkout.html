@@ -98,10 +98,19 @@ h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color
   document.getElementById("billing").textContent=copy.billings[product.billing]||product.billing;
   document.getElementById("price").textContent=new Intl.NumberFormat(lang==="en"?"en-US":"ko-KR",{style:"currency",currency:"KRW",maximumFractionDigits:0}).format(product.priceKRW);
 
-  var subject=(lang==="en"?"Order request: ":"상품 주문 신청: ")+product.name[lang];
+  var orderRef="SGE-"+Date.now().toString(36).toUpperCase();
+  var diagnosis={
+    grade:params.get("grade")||"",
+    experience:params.get("experience")||"",
+    goal:params.get("goal")||"",
+    recommendation:params.get("recommendation")||""
+  };
+  var diagnosisKo=diagnosis.grade?"\n진단 결과: 학년="+diagnosis.grade+", 경험="+diagnosis.experience+", 목표="+diagnosis.goal+", 추천="+diagnosis.recommendation:"";
+  var diagnosisEn=diagnosis.grade?"\nDiagnosis: grade="+diagnosis.grade+", experience="+diagnosis.experience+", goal="+diagnosis.goal+", recommendation="+diagnosis.recommendation:"";
+  var subject=(lang==="en"?"Order request: ":"상품 주문 신청: ")+product.name[lang]+" ["+orderRef+"]";
   var orderBody=lang==="en"
-    ? "Product: "+product.name[lang]+"\nProduct ID: "+productId+"\nPrice: KRW "+product.priceKRW+"\n\nName:\nPhone or messenger:\nStudent grade/level:\nQuestions:"
-    : "상품명: "+product.name[lang]+"\n상품 ID: "+productId+"\n표시 금액: "+new Intl.NumberFormat("ko-KR").format(product.priceKRW)+"원\n\n신청자 이름:\n연락 가능한 전화번호 또는 메신저:\n학생 학년/현재 수준:\n문의사항:";
+    ? "Order reference: "+orderRef+"\nProduct: "+product.name[lang]+"\nProduct ID: "+productId+"\nSKU: "+(product.sku||productId)+"\nPrice: KRW "+product.priceKRW+diagnosisEn+"\n\nName:\nPhone or messenger:\nStudent grade/level:\nQuestions:"
+    : "주문번호: "+orderRef+"\n상품명: "+product.name[lang]+"\n상품 ID: "+productId+"\nSKU: "+(product.sku||productId)+"\n표시 금액: "+new Intl.NumberFormat("ko-KR").format(product.priceKRW)+"원"+diagnosisKo+"\n\n신청자 이름:\n연락 가능한 전화번호 또는 메신저:\n학생 학년/현재 수준:\n문의사항:";
   var mailUrl="mailto:"+encodeURIComponent(payment.supportEmail||"ceo@stargateedu.co.kr")+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(orderBody);
   document.getElementById("supportLink").href=mailUrl;
 
