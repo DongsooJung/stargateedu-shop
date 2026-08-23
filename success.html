@@ -1,5 +1,76 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>결제 완료 · Stargate Edu</title>
-<style>body{margin:0;font-family:Inter,'Pretendard','Noto Sans KR',system-ui,sans-serif;background:#F7F9FC;color:#1A2233;display:grid;min-height:100vh;place-items:center}.box{max-width:620px;margin:20px;background:#fff;border:1px solid #E4E7EC;border-radius:20px;padding:42px;text-align:center;box-shadow:0 16px 42px rgba(11,42,74,.08)}.icon{font-size:54px}h1{color:#0B2A4A;margin:12px 0 8px}p{color:#667085}.btn{display:inline-block;margin-top:20px;padding:13px 24px;border-radius:9px;background:#C9A227;color:#3a2e00;text-decoration:none;font-weight:800}</style></head>
-<body><main class="box"><div class="icon">✓</div><h1 id="title">결제가 완료되었습니다</h1><p id="message">결제사 확인 후 등록한 이메일로 주문 및 이용 안내가 발송됩니다.</p><a class="btn" id="home" href="./">쇼핑몰로 돌아가기</a></main>
-<script>(function(){var en=new URLSearchParams(location.search).get("lang")==="en";if(en){document.documentElement.lang="en";document.title="Payment complete · Stargate Edu";document.getElementById("title").textContent="Payment complete";document.getElementById("message").textContent="Your order and access instructions will be sent to the email registered with the payment provider.";document.getElementById("home").textContent="Return to the shop";document.getElementById("home").href="./en/";}})();</script></body></html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>결제 승인 · Stargate Edu</title>
+<style>body{margin:0;font-family:Inter,'Pretendard','Noto Sans KR',system-ui,sans-serif;background:#F7F9FC;color:#1A2233;display:grid;min-height:100vh;place-items:center}.box{max-width:660px;margin:20px;background:#fff;border:1px solid #E4E7EC;border-radius:20px;padding:42px;text-align:center;box-shadow:0 16px 42px rgba(11,42,74,.08)}.icon{font-size:54px}h1{color:#0B2A4A;margin:12px 0 8px}p{color:#667085}.detail{margin:20px 0 0;padding:14px;border-radius:10px;background:#F7F9FC;color:#344054;font-size:13px;word-break:break-word}.btn{display:inline-block;margin-top:20px;padding:13px 24px;border-radius:9px;background:#C9A227;color:#3a2e00;text-decoration:none;font-weight:800}.error{color:#9c2f2b}</style>
+</head>
+<body><main class="box"><div class="icon" id="icon">…</div><h1 id="title">결제를 승인하고 있습니다</h1><p id="message">창을 닫지 말고 잠시만 기다려 주세요.</p><div class="detail" id="detail">결제 승인 요청 준비 중</div><a class="btn" id="home" href="./" style="display:none">쇼핑몰로 돌아가기</a></main>
+<script src="./js/payment-config.js"></script>
+<script>
+(async function(){
+  "use strict";
+  var params=new URLSearchParams(location.search);
+  var en=params.get("lang")==="en";
+  var paymentKey=params.get("paymentKey")||"";
+  var orderId=params.get("orderId")||"";
+  var amount=Number(params.get("amount"));
+  var productId=params.get("product")||"";
+  var config=window.STARGATE_PAYMENT||{};
+  var icon=document.getElementById("icon");
+  var title=document.getElementById("title");
+  var message=document.getElementById("message");
+  var detail=document.getElementById("detail");
+  var home=document.getElementById("home");
+  document.documentElement.lang=en?"en":"ko";
+  home.href=en?"./en/":"./";
+  home.textContent=en?"Return to the shop":"쇼핑몰로 돌아가기";
+
+  function fail(code,msg){
+    icon.textContent="!";
+    title.textContent=en?"Payment confirmation failed":"결제 승인에 실패했습니다";
+    message.textContent=msg||(en?"The payment could not be finalized. Please contact support with the order number.":"결제를 최종 승인하지 못했습니다. 주문번호와 함께 문의해 주세요.");
+    detail.classList.add("error");
+    detail.textContent=(en?"Code: ":"오류 코드: ")+(code||"UNKNOWN")+(orderId?" · "+orderId:"");
+    home.style.display="inline-block";
+  }
+
+  if(!paymentKey||!orderId||!Number.isInteger(amount)||!productId){
+    fail("MISSING_PAYMENT_RESULT",en?"Required payment result values are missing.":"결제 결과에 필요한 값이 누락되었습니다.");
+    return;
+  }
+  if(!config.confirmEndpoint||!config.supabaseAnonKey){
+    fail("CONFIRM_BACKEND_NOT_CONFIGURED",en?"The payment confirmation backend is not configured.":"결제 승인 백엔드 설정이 완료되지 않았습니다.");
+    return;
+  }
+
+  try{
+    detail.textContent=en?"Confirming with TossPayments…":"토스페이먼츠 최종 승인 중…";
+    var response=await fetch(config.confirmEndpoint,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+config.supabaseAnonKey,
+        "apikey":config.supabaseAnonKey
+      },
+      body:JSON.stringify({paymentKey:paymentKey,orderId:orderId,amount:amount,productId:productId})
+    });
+    var body={};
+    try{body=await response.json();}catch(e){}
+    if(!response.ok||!body.ok){
+      fail(body.code||("HTTP_"+response.status),body.message||"");
+      return;
+    }
+    icon.textContent="✓";
+    title.textContent=en?"Payment complete":"결제가 완료되었습니다";
+    message.textContent=en?"Your payment was confirmed successfully. Order and access instructions will be sent separately.":"토스페이먼츠 최종 승인이 완료되었습니다. 주문 및 이용 안내는 별도로 전달됩니다.";
+    var approved=body.payment||{};
+    var product=body.product||{};
+    detail.textContent=(en?"Order: ":"주문번호: ")+orderId+" · "+(product.sku||productId)+" · "+new Intl.NumberFormat(en?"en-US":"ko-KR",{style:"currency",currency:"KRW",maximumFractionDigits:0}).format(product.amount||amount)+(approved.status?" · "+approved.status:"");
+    home.style.display="inline-block";
+    if(Array.isArray(window.dataLayer)){window.dataLayer.push({event:"purchase",transaction_id:orderId,value:product.amount||amount,currency:"KRW",items:[{item_id:product.sku||productId,item_name:product.name||productId}]});}
+  }catch(err){
+    console.error("Payment confirmation error",err);
+    fail("CONFIRM_NETWORK_ERROR",en?"A network error occurred while finalizing the payment.":"결제 최종 승인 중 네트워크 오류가 발생했습니다.");
+  }
+})();
+</script></body></html>
