@@ -3,7 +3,8 @@
   var script = document.currentScript;
   var lang = script && script.dataset.lang === "en" ? "en" : "ko";
   var catalog = window.STARGATE_CATALOG || {};
-  var order = window.STARGATE_PRODUCT_ORDER || {};
+  var productOrder = window.STARGATE_PRODUCT_ORDER || {};
+  var order = productOrder[lang] || productOrder;
   var labels = {
     ko: { buy: "구매하기", subscribe: "구독하기", checkout: "결제 단계로 이동" },
     en: { buy: "Buy now", subscribe: "Subscribe", checkout: "Continue to checkout" }

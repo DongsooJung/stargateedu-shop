@@ -6,8 +6,41 @@
 <meta name="robots" content="noindex,follow">
 <title>결제 · Stargate Edu</title>
 <style>
-:root{--navy:#0B2A4A;--gold:#C9A227;--ink:#1A2233;--gray:#667085;--line:#E4E7EC;--bg:#F7F9FC;--ok:#16794d}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,'Pretendard','Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}a{text-decoration:none}.top{background:#fff;border-bottom:1px solid var(--line)}.topin{max-width:960px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}.logo{font-size:20px;font-weight:900;color:var(--navy)}.logo b{color:var(--gold)}.back{font-size:14px;color:var(--navy);font-weight:700}main{max-width:960px;margin:48px auto;padding:0 20px}.eyebrow{color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.8px}h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color:var(--gray);margin:0 0 28px}.checkout{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 12px 32px rgba(11,42,74,.06)}.label{font-size:12px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.7px}.product{font-size:22px;color:var(--navy);line-height:1.35;margin:8px 0 18px}.rows{border-top:1px solid var(--line)}.row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.row span:first-child{color:var(--gray)}.total{font-size:25px;font-weight:900;color:var(--navy)}.secure{display:flex;gap:10px;align-items:flex-start;background:#eef8f3;border:1px solid #cfe8dc;color:var(--ok);padding:13px;border-radius:10px;font-size:13px;margin-bottom:18px}.pay{display:block;width:100%;border:0;border-radius:10px;background:var(--gold);color:#3a2e00;padding:15px;text-align:center;font-size:15px;font-weight:900;cursor:pointer}.pay[aria-disabled="true"]{background:#D0D5DD;color:#667085;cursor:not-allowed}.support{display:block;text-align:center;margin-top:12px;color:var(--navy);font-size:13px;font-weight:700}.note{font-size:12px;color:var(--gray);margin-top:16px}.pending{margin-top:14px;padding:12px;border-radius:9px;background:#fff8e6;color:#765b00;font-size:13px}.error{display:none;background:#fff;border:1px solid #f2b8b5;color:#9c2f2b;border-radius:12px;padding:22px}@media(max-width:720px){main{margin-top:30px}.checkout{grid-template-columns:1fr}.panel{padding:20px}}
+:root{--navy:#0B2A4A;--gold:#C9A227;--ink:#1A2233;--gray:#667085;--line:#E4E7EC;--bg:#F7F9FC;--ok:#16794d;--err:#9c2f2b}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,'Pretendard','Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}a{text-decoration:none}
+.top{background:#fff;border-bottom:1px solid var(--line)}.topin{max-width:960px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:900;color:var(--navy)}.logo b{color:var(--gold)}.back{font-size:14px;color:var(--navy);font-weight:700}
+main{max-width:960px;margin:48px auto;padding:0 20px}
+.eyebrow{color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.8px}
+h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color:var(--gray);margin:0 0 28px}
+.checkout{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 12px 32px rgba(11,42,74,.06)}
+.panel+.panel{margin-top:22px}
+.label{font-size:12px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.7px}
+.product{font-size:22px;color:var(--navy);line-height:1.35;margin:8px 0 18px}
+.rows{border-top:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row span:first-child{color:var(--gray)}.total{font-size:25px;font-weight:900;color:var(--navy)}
+.field{margin-top:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.field .req{color:var(--err);margin-left:3px}
+.field input{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
+.field input:focus{outline:2px solid rgba(11,42,74,.35);outline-offset:1px;border-color:var(--navy)}
+.field input[aria-invalid="true"]{border-color:#f2b8b5;background:#fffafa}
+.hint{font-size:12px;color:var(--gray);margin-top:5px}
+.fieldError{font-size:12px;color:var(--err);margin-top:5px;min-height:0}
+.agree{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.agree label{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:#344054;margin-top:10px;cursor:pointer}
+.agree input{margin-top:3px;width:16px;height:16px;flex:0 0 auto;accent-color:#0B2A4A}
+.agree a{color:var(--navy);font-weight:700;text-decoration:underline}
+.secure{display:flex;gap:10px;align-items:flex-start;background:#eef8f3;border:1px solid #cfe8dc;color:var(--ok);padding:13px;border-radius:10px;font-size:13px;margin-bottom:18px}
+.pay{display:block;width:100%;border:0;border-radius:10px;background:var(--gold);color:#3a2e00;padding:15px;text-align:center;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit}
+.pay[aria-disabled="true"],.pay:disabled{background:#D0D5DD;color:#667085;cursor:not-allowed}
+.support{display:block;text-align:center;margin-top:12px;color:var(--navy);font-size:13px;font-weight:700}
+.note{font-size:12px;color:var(--gray);margin-top:16px}
+.pending{margin-top:14px;padding:12px;border-radius:9px;background:#fff8e6;color:#765b00;font-size:13px}
+.error{display:none;background:#fff;border:1px solid #f2b8b5;color:var(--err);border-radius:12px;padding:22px}
+@media(max-width:720px){main{margin-top:30px}.checkout{grid-template-columns:1fr}.panel{padding:20px}}
 </style>
 </head>
 <body>
@@ -19,29 +52,62 @@
     <h1 id="title">주문 확인</h1>
     <p class="lead" id="lead">상품과 금액을 확인한 후 결제를 진행합니다.</p>
     <div class="checkout">
-      <section class="panel" aria-labelledby="productName">
-        <div class="label" id="summaryLabel">선택 상품</div>
-        <h2 class="product" id="productName"></h2>
-        <div class="rows">
-          <div class="row"><span id="typeLabel">상품 유형</span><strong id="productType"></strong></div>
-          <div class="row"><span id="deliveryLabel">제공 방식</span><strong id="delivery"></strong></div>
-          <div class="row"><span id="billingLabel">결제 주기</span><strong id="billing"></strong></div>
-          <div class="row"><span id="totalLabel">총 결제금액</span><strong class="total" id="price"></strong></div>
-        </div>
-      </section>
+      <div>
+        <section class="panel" aria-labelledby="productName">
+          <div class="label" id="summaryLabel">선택 상품</div>
+          <h2 class="product" id="productName"></h2>
+          <div class="rows">
+            <div class="row"><span id="typeLabel">상품 유형</span><strong id="productType"></strong></div>
+            <div class="row"><span id="deliveryLabel">제공 방식</span><strong id="delivery"></strong></div>
+            <div class="row"><span id="billingLabel">결제 주기</span><strong id="billing"></strong></div>
+            <div class="row"><span id="orderRefLabel">주문번호</span><strong id="orderRefValue"></strong></div>
+            <div class="row"><span id="totalLabel">총 결제금액</span><strong class="total" id="price"></strong></div>
+          </div>
+        </section>
+
+        <section class="panel" id="buyerPanel" aria-labelledby="buyerLabel">
+          <div class="label" id="buyerLabel">구매자 정보</div>
+          <p class="hint" id="buyerHint">주문 확인과 상품 전달에만 사용하며, 카드 정보는 입력받지 않습니다.</p>
+          <form id="buyerForm" novalidate>
+            <div class="field">
+              <label for="buyerName" id="nameLabel">이름<span class="req">*</span></label>
+              <input id="buyerName" name="name" type="text" autocomplete="name" maxlength="60" required>
+              <div class="fieldError" id="nameError"></div>
+            </div>
+            <div class="field">
+              <label for="buyerEmail" id="emailLabel">이메일<span class="req">*</span></label>
+              <input id="buyerEmail" name="email" type="email" autocomplete="email" maxlength="100" required>
+              <div class="hint" id="emailHint">디지털 상품·영수증이 이 주소로 발송됩니다.</div>
+              <div class="fieldError" id="emailError"></div>
+            </div>
+            <div class="field">
+              <label for="buyerPhone" id="phoneLabel">휴대폰 번호<span class="req">*</span></label>
+              <input id="buyerPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="20" placeholder="010-0000-0000" required>
+              <div class="fieldError" id="phoneError"></div>
+            </div>
+            <div class="agree">
+              <label><input type="checkbox" id="agreeTerms"><span id="agreeTermsText">[필수] <a href="./terms.html" target="_blank" rel="noopener">이용약관</a> 및 <a href="https://stargateedu.co.kr/refund/" target="_blank" rel="noopener">환불정책</a>에 동의합니다.</span></label>
+              <label><input type="checkbox" id="agreePrivacy"><span id="agreePrivacyText">[필수] 주문 처리·상품 전달을 위한 <a href="./privacy.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다. (이름·이메일·연락처 / 보관 5년, 전자상거래법)</span></label>
+            </div>
+          </form>
+        </section>
+      </div>
+
       <aside class="panel">
         <div class="secure"><span>🔒</span><span id="secureText">카드 정보는 토스페이먼츠가 직접 처리하며 이 사이트에는 저장되지 않습니다.</span></div>
-        <a class="pay" id="payButton" href="#" aria-disabled="true">결제하기</a>
+        <button class="pay" id="payButton" type="button" aria-disabled="true" disabled>결제하기</button>
         <div class="pending" id="pending">결제 연동을 확인하는 중입니다.</div>
         <a class="support" id="supportLink" href="mailto:ceo@stargateedu.co.kr">결제·주문 문의</a>
         <p class="note" id="note">결제 전 이용약관과 환불정책을 확인해 주세요.</p>
       </aside>
     </div>
   </div>
+  <div id="bizFooter"></div>
 </main>
 <script src="https://js.tosspayments.com/v2/standard"></script>
 <script src="./js/catalog.js"></script>
 <script src="./js/payment-config.js"></script>
+<script src="./js/legal.js"></script>
 <script>
 (function(){
   "use strict";
@@ -52,15 +118,29 @@
   var product=catalog[productId];
   var config=window.STARGATE_PAYMENT||{};
   var copy={
-    ko:{title:"주문 확인",lead:"상품과 금액을 확인한 후 토스페이먼츠 결제를 진행합니다.",summary:"선택 상품",type:"상품 유형",delivery:"제공 방식",billing:"결제 주기",total:"총 결제금액",pay:"30,000원 결제하기",fallback:"이메일로 주문 신청",pending:"토스페이먼츠 클라이언트 키가 아직 연결되지 않아 이메일 주문으로 전환합니다.",support:"결제·주문 문의",back:"← 쇼핑 계속하기",secure:"카드 정보는 토스페이먼츠가 직접 처리하며 이 사이트에는 저장되지 않습니다.",note:"결제 전 이용약관과 환불정책을 확인해 주세요.",error:"선택한 상품을 찾을 수 없습니다.",types:{course:"온라인 강의",subscription:"구독",book:"교재",live:"라이브 과정",consulting:"컨설팅"},deliveries:{digital:"디지털 제공",physical:"실물 배송",live:"실시간 온라인",in_person:"오프라인",appointment:"예약제"},billings:{one_time:"1회 결제",monthly:"매월",annual:"매년"}},
-    en:{title:"Review your order",lead:"Confirm the product and amount, then continue with TossPayments.",summary:"Selected product",type:"Product type",delivery:"Delivery",billing:"Billing",total:"Total",pay:"Pay now",fallback:"Request order by email",pending:"The TossPayments client key is not connected yet, so checkout is temporarily using email orders.",support:"Payment & order support",back:"← Continue shopping",secure:"TossPayments processes card details directly. This site never stores them.",note:"Review the Terms and Refund Policy before payment.",error:"The selected product could not be found.",types:{course:"Online course",subscription:"Subscription",book:"Book",live:"Live program",consulting:"Consulting"},deliveries:{digital:"Digital access",physical:"Physical shipping",live:"Live online",in_person:"In person",appointment:"By appointment"},billings:{one_time:"One-time",monthly:"Monthly",annual:"Annual"}}
+    ko:{title:"주문 확인",lead:"상품과 금액을 확인한 후 토스페이먼츠 결제를 진행합니다.",summary:"선택 상품",type:"상품 유형",delivery:"제공 방식",billing:"결제 주기",orderRef:"주문번호",total:"총 결제금액",buyer:"구매자 정보",buyerHint:"주문 확인과 상품 전달에만 사용하며, 카드 정보는 입력받지 않습니다.",name:"이름",email:"이메일",emailHint:"디지털 상품·영수증이 이 주소로 발송됩니다.",phone:"휴대폰 번호",pay:"결제하기",fallback:"이메일로 주문 신청",pending:"토스페이먼츠 클라이언트 키가 아직 연결되지 않아 이메일 주문으로 전환합니다.",subscription:"정기 구독 상품은 자동결제(빌링) 연동 준비 중이라 이메일 주문으로 접수합니다.",physical:"실물 상품은 배송주소 확인이 필요해 이메일 주문으로 접수합니다.",support:"결제·주문 문의",back:"← 쇼핑 계속하기",secure:"카드 정보는 토스페이먼츠가 직접 처리하며 이 사이트에는 저장되지 않습니다.",note:"결제 전 이용약관과 환불정책을 확인해 주세요.",error:"선택한 상품을 찾을 수 없습니다.",errName:"이름을 입력해 주세요.",errEmail:"올바른 이메일 주소를 입력해 주세요.",errPhone:"휴대폰 번호를 정확히 입력해 주세요.",errAgree:"필수 항목에 동의해 주세요.",openFail:"결제창을 열지 못했습니다. 다시 시도하거나 문의해 주세요.",
+      types:{course:"온라인 강의",subscription:"구독",book:"교재",live:"라이브 과정",consulting:"컨설팅"},
+      deliveries:{digital:"디지털 제공",physical:"실물 배송",live:"실시간 온라인",in_person:"오프라인",appointment:"예약제"},
+      billings:{one_time:"1회 결제",monthly:"매월",annual:"매년"}},
+    en:{title:"Review your order",lead:"Confirm the product and amount, then continue with TossPayments.",summary:"Selected product",type:"Product type",delivery:"Delivery",billing:"Billing",orderRef:"Order number",total:"Total",buyer:"Buyer information",buyerHint:"Used only for order confirmation and delivery. Card details are never entered here.",name:"Full name",email:"Email",emailHint:"Digital goods and the receipt are sent to this address.",phone:"Mobile number",pay:"Pay now",fallback:"Request order by email",pending:"The TossPayments client key is not connected yet, so checkout is temporarily using email orders.",subscription:"Recurring plans are pending billing-key integration and are handled by email for now.",physical:"Physical products require a confirmed shipping address and are handled by email for now.",support:"Payment & order support",back:"← Continue shopping",secure:"TossPayments processes card details directly. This site never stores them.",note:"Review the Terms and Refund Policy before payment.",error:"The selected product could not be found.",errName:"Please enter your name.",errEmail:"Please enter a valid email address.",errPhone:"Please enter a valid mobile number.",errAgree:"Please accept the required agreements.",openFail:"Could not open the payment window. Please retry or contact support.",
+      types:{course:"Online course",subscription:"Subscription",book:"Book",live:"Live program",consulting:"Consulting"},
+      deliveries:{digital:"Digital access",physical:"Physical shipping",live:"Live online",in_person:"In person",appointment:"By appointment"},
+      billings:{one_time:"One-time",monthly:"Monthly",annual:"Annual"}}
   }[lang];
 
   document.documentElement.lang=lang;
   document.title=copy.title+" · Stargate Edu";
-  ["title","lead","summaryLabel","typeLabel","deliveryLabel","billingLabel","totalLabel","supportLink","backLink","secureText","note"].forEach(function(id){
-    var map={title:copy.title,lead:copy.lead,summaryLabel:copy.summary,typeLabel:copy.type,deliveryLabel:copy.delivery,billingLabel:copy.billing,totalLabel:copy.total,supportLink:copy.support,backLink:copy.back,secureText:copy.secure,note:copy.note};
-    document.getElementById(id).textContent=map[id];
+  var textMap={title:copy.title,lead:copy.lead,summaryLabel:copy.summary,typeLabel:copy.type,deliveryLabel:copy.delivery,billingLabel:copy.billing,orderRefLabel:copy.orderRef,totalLabel:copy.total,buyerLabel:copy.buyer,buyerHint:copy.buyerHint,emailHint:copy.emailHint,supportLink:copy.support,backLink:copy.back,secureText:copy.secure,note:copy.note};
+  Object.keys(textMap).forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=textMap[id];});
+  if(lang==="en"){
+    document.getElementById("agreeTermsText").innerHTML='[Required] I agree to the <a href="./terms.html" target="_blank" rel="noopener">Terms</a> and <a href="https://stargateedu.co.kr/refund/" target="_blank" rel="noopener">Refund Policy</a>.';
+    document.getElementById("agreePrivacyText").innerHTML='[Required] I agree to the <a href="./privacy.html" target="_blank" rel="noopener">collection and use of personal information</a> for order processing and delivery. (Name, email, mobile number / retained for 5 years under Korean e-commerce law)';
+  }
+  [["nameLabel",copy.name],["emailLabel",copy.email],["phoneLabel",copy.phone]].forEach(function(pair){
+    var el=document.getElementById(pair[0]);
+    if(!el)return;
+    el.textContent=pair[1];
+    var req=document.createElement("span");req.className="req";req.textContent="*";el.appendChild(req);
   });
   var home=lang==="en"?"./en/":"./";
   document.getElementById("homeLink").href=home;
@@ -74,42 +154,99 @@
     return;
   }
 
+  var orderRef="SGE-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+
   document.getElementById("productName").textContent=product.name[lang];
   document.getElementById("productType").textContent=copy.types[product.type]||product.type;
   document.getElementById("delivery").textContent=copy.deliveries[product.delivery]||product.delivery;
   document.getElementById("billing").textContent=copy.billings[product.billing]||product.billing;
+  document.getElementById("orderRefValue").textContent=orderRef;
   document.getElementById("price").textContent=new Intl.NumberFormat(lang==="en"?"en-US":"ko-KR",{style:"currency",currency:"KRW",maximumFractionDigits:0}).format(product.priceKRW);
 
-  var orderRef="SGE-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
   var diagnosis={grade:params.get("grade")||"",experience:params.get("experience")||"",goal:params.get("goal")||"",recommendation:params.get("recommendation")||""};
-  var diagnosisKo=diagnosis.grade?"\n진단 결과: 학년="+diagnosis.grade+", 경험="+diagnosis.experience+", 목표="+diagnosis.goal+", 추천="+diagnosis.recommendation:"";
-  var diagnosisEn=diagnosis.grade?"\nDiagnosis: grade="+diagnosis.grade+", experience="+diagnosis.experience+", goal="+diagnosis.goal+", recommendation="+diagnosis.recommendation:"";
+  var diagnosisLine=diagnosis.grade?(lang==="en"
+    ?"\nDiagnosis: grade="+diagnosis.grade+", experience="+diagnosis.experience+", goal="+diagnosis.goal+", recommendation="+diagnosis.recommendation
+    :"\n진단 결과: 학년="+diagnosis.grade+", 경험="+diagnosis.experience+", 목표="+diagnosis.goal+", 추천="+diagnosis.recommendation):"";
   var subject=(lang==="en"?"Order request: ":"상품 주문 신청: ")+product.name[lang]+" ["+orderRef+"]";
   var orderBody=lang==="en"
-    ?"Order reference: "+orderRef+"\nProduct: "+product.name[lang]+"\nProduct ID: "+productId+"\nSKU: "+(product.sku||productId)+"\nPrice: KRW "+product.priceKRW+diagnosisEn
-    :"주문번호: "+orderRef+"\n상품명: "+product.name[lang]+"\n상품 ID: "+productId+"\nSKU: "+(product.sku||productId)+"\n표시 금액: "+new Intl.NumberFormat("ko-KR").format(product.priceKRW)+"원"+diagnosisKo;
+    ?"Order reference: "+orderRef+"\nProduct: "+product.name[lang]+"\nProduct ID: "+productId+"\nSKU: "+(product.sku||productId)+"\nPrice: KRW "+product.priceKRW+diagnosisLine
+    :"주문번호: "+orderRef+"\n상품명: "+product.name[lang]+"\n상품 ID: "+productId+"\nSKU: "+(product.sku||productId)+"\n표시 금액: "+new Intl.NumberFormat("ko-KR").format(product.priceKRW)+"원"+diagnosisLine;
   var mailUrl="mailto:"+encodeURIComponent(config.supportEmail||"ceo@stargateedu.co.kr")+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(orderBody);
   document.getElementById("supportLink").href=mailUrl;
 
   var pay=document.getElementById("payButton");
   var pending=document.getElementById("pending");
+  var buyerPanel=document.getElementById("buyerPanel");
   var tossProducts=Array.isArray(config.tossEnabledProducts)?config.tossEnabledProducts:[];
-  var tossReady=tossProducts.indexOf(productId)>=0 && typeof config.tossClientKey==="string" && config.tossClientKey.trim() && typeof window.TossPayments==="function";
+  var isTossProduct=tossProducts.indexOf(productId)>=0;
+  var keyReady=typeof config.tossClientKey==="string" && config.tossClientKey.trim().length>0;
+  var sdkReady=typeof window.TossPayments==="function";
 
-  if(!tossReady){
-    pay.href=mailUrl;
-    pay.removeAttribute("aria-disabled");
-    pay.textContent=copy.fallback;
-    pending.textContent=copy.pending;
-    return;
+  function emailFallback(reason){
+    buyerPanel.style.display="none";
+    var link=document.createElement("a");
+    link.className="pay";link.href=mailUrl;link.id="payButton";link.textContent=copy.fallback;
+    pay.parentNode.replaceChild(link,pay);
+    pending.textContent=reason;
   }
 
-  pay.removeAttribute("aria-disabled");
-  pay.textContent=lang==="ko" && productId==="koi-algorithms-guide"?copy.pay:copy.pay;
+  if(!isTossProduct){ emailFallback(product.delivery==="physical"?copy.physical:copy.subscription); return; }
+  if(!keyReady||!sdkReady){ emailFallback(copy.pending); return; }
+
   pending.style.display="none";
-  pay.addEventListener("click",async function(event){
-    event.preventDefault();
+  pay.textContent=copy.pay;
+
+  var nameInput=document.getElementById("buyerName");
+  var emailInput=document.getElementById("buyerEmail");
+  var phoneInput=document.getElementById("buyerPhone");
+  var agreeTerms=document.getElementById("agreeTerms");
+  var agreePrivacy=document.getElementById("agreePrivacy");
+
+  function digits(value){ return (value||"").replace(/[^0-9]/g,""); }
+  function validName(){ return nameInput.value.trim().length>=1; }
+  function validEmail(){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailInput.value.trim()); }
+  function validPhone(){ var d=digits(phoneInput.value); return d.length>=10 && d.length<=11 && d.charAt(0)==="0"; }
+  function allValid(){ return validName()&&validEmail()&&validPhone()&&agreeTerms.checked&&agreePrivacy.checked; }
+
+  function setError(input,errorId,ok,message){
+    var box=document.getElementById(errorId);
+    input.setAttribute("aria-invalid",ok?"false":"true");
+    box.textContent=ok?"":message;
+  }
+
+  function refresh(){
+    var ok=allValid();
+    pay.disabled=!ok;
+    if(ok){pay.removeAttribute("aria-disabled");}else{pay.setAttribute("aria-disabled","true");}
+  }
+
+  phoneInput.addEventListener("input",function(){
+    var d=digits(phoneInput.value).slice(0,11);
+    phoneInput.value=d.length>7?d.slice(0,3)+"-"+d.slice(3,d.length-4)+"-"+d.slice(-4):(d.length>3?d.slice(0,3)+"-"+d.slice(3):d);
+  });
+  [nameInput,emailInput,phoneInput].forEach(function(el){el.addEventListener("input",refresh);});
+  [agreeTerms,agreePrivacy].forEach(function(el){el.addEventListener("change",refresh);});
+  nameInput.addEventListener("blur",function(){setError(nameInput,"nameError",validName(),copy.errName);});
+  emailInput.addEventListener("blur",function(){setError(emailInput,"emailError",validEmail(),copy.errEmail);});
+  phoneInput.addEventListener("blur",function(){setError(phoneInput,"phoneError",validPhone(),copy.errPhone);});
+  refresh();
+
+  pay.addEventListener("click",async function(){
+    if(!allValid()){
+      setError(nameInput,"nameError",validName(),copy.errName);
+      setError(emailInput,"emailError",validEmail(),copy.errEmail);
+      setError(phoneInput,"phoneError",validPhone(),copy.errPhone);
+      pending.style.display="block";
+      pending.textContent=copy.errAgree;
+      return;
+    }
+    pay.disabled=true;
     pay.setAttribute("aria-disabled","true");
+
+    var customer={name:nameInput.value.trim(),email:emailInput.value.trim(),phone:phoneInput.value.trim()};
+    // 리다이렉트 이후 success.html 이 이어받도록 이 브라우저 탭에만 잠시 보관한다.
+    try{ sessionStorage.setItem("sge:order:"+orderRef,JSON.stringify({productId:productId,customer:customer})); }catch(e){}
+
     try{
       var customerKey="sg-"+(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
       var tossPayments=TossPayments(config.tossClientKey.trim());
@@ -126,12 +263,16 @@
         orderId:orderRef,
         orderName:product.name[lang],
         successUrl:successUrl.toString(),
-        failUrl:failUrl.toString()
+        failUrl:failUrl.toString(),
+        customerName:customer.name,
+        customerEmail:customer.email,
+        customerMobilePhone:digits(customer.phone)
       });
     }catch(err){
       console.error("TossPayments request failed",err);
       pending.style.display="block";
-      pending.textContent=lang==="en"?"Could not open the payment window. Please retry or contact support.":"결제창을 열지 못했습니다. 다시 시도하거나 문의해 주세요.";
+      pending.textContent=(err&&err.message)?err.message:copy.openFail;
+      pay.disabled=false;
       pay.removeAttribute("aria-disabled");
     }
   });
