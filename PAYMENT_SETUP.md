@@ -36,7 +36,9 @@ shop_orders → DONE / FAILED / CANCELED 확정
 - 동일 `orderId` 재요청은 멱등 처리한다. 새로고침·재시도로 중복 승인되지 않는다.
 - CORS 는 `shop.stargateedu.co.kr` 등 허용 출처만 통과한다.
 
-## 3. 남은 설정 (이 두 가지만 하면 실결제가 열린다)
+## 3. 결제 연동에 필요한 설정
+
+두 키를 등록하면 결제창을 시험할 수 있습니다. 라이브 전환에는 5절의 사업자 정보, 상품 제공, 취소 절차와 실결제 검증도 필요합니다.
 
 ### ① 시크릿 키 등록 — Supabase
 Supabase 대시보드 → 프로젝트 `inftexpcnfinglwlrvsj` → **Edge Functions → Secrets** → Add new secret
@@ -78,14 +80,16 @@ from public.shop_orders order by created_at desc limit 10;
 - [ ] 토스페이먼츠 상점 심사 완료 및 라이브 키 발급
 - [ ] `TOSS_SECRET_KEY` 를 `live_sk_*` 로 교체
 - [ ] `tossClientKey` 를 `live_ck_*` 로 교체 후 커밋·배포
-- [ ] **사업자 대표 전화번호 기재** (`js/payment-config.js` 의 `STARGATE_BUSINESS.phone`) — 전자상거래법 제10조 필수 표기 항목이며 현재 공란
+- [ ] **사업자 대표 전화번호 기재** (`js/payment-config.js` 의 `STARGATE_BUSINESS.phone`) — 현재 공란
+- [ ] 판매할 디지털 상품의 원본 파일·접근 권한과 구매 후 전달 담당자·방법 확인 (현재 저장소의 5문제 샘플 PDF는 25개 알고리즘 가이드 원본이 아님)
+- [ ] 라이브 강의·캠프·상담의 실제 제공 일정과 예약 가능 여부 확인
 - [ ] 소액 실결제 1건 후 토스 관리자에서 취소 처리하여 전 구간 검증
 - [ ] 환불 처리 절차 확정 (`/v1/payments/{paymentKey}/cancel` 연동 또는 토스 관리자 수동 취소)
 
 ## 6. 현재 열려 있는 상품
 
 배송주소가 필요 없는 단건결제 9종 (`js/payment-config.js` 의 `tossEnabledProducts`).
-정기 구독 4종(문제은행 월/연, 월간 모의고사, 1:1 정기 멘토링)은 **빌링키(자동결제) 연동이 별도로 필요**하고, 실물 교재 3종은 **배송주소 수집·저장 연동이 필요**하여 이메일 주문으로 접수된다.
+정기 구독 4종(문제은행 월/연, 월간 모의고사, 1:1 정기 멘토링)은 **빌링키(자동결제) 연동이 별도로 필요**하고, 실물 교재 3종은 **배송주소 수집·저장 연동이 필요**하여 이메일 문의로 안내한다. 이메일 문의는 주문·결제 확정이 아니며, 실제 제공 가능 여부를 확인한 뒤 회신해야 한다.
 
 ## 7. 가격 변경 시
 
