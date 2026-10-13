@@ -118,11 +118,11 @@ h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color
   var product=catalog[productId];
   var config=window.STARGATE_PAYMENT||{};
   var copy={
-    ko:{title:"주문 확인",lead:"상품과 금액을 확인한 후 토스페이먼츠 결제를 진행합니다.",summary:"선택 상품",type:"상품 유형",delivery:"제공 방식",billing:"결제 주기",orderRef:"주문번호",total:"총 결제금액",buyer:"구매자 정보",buyerHint:"주문 확인과 상품 전달에만 사용하며, 카드 정보는 입력받지 않습니다.",name:"이름",email:"이메일",emailHint:"디지털 상품·영수증이 이 주소로 발송됩니다.",phone:"휴대폰 번호",pay:"결제하기",fallback:"이메일로 주문 신청",pending:"토스페이먼츠 클라이언트 키가 아직 연결되지 않아 이메일 주문으로 전환합니다.",subscription:"정기 구독 상품은 자동결제(빌링) 연동 준비 중이라 이메일 주문으로 접수합니다.",physical:"실물 상품은 배송주소 확인이 필요해 이메일 주문으로 접수합니다.",support:"결제·주문 문의",back:"← 쇼핑 계속하기",secure:"카드 정보는 토스페이먼츠가 직접 처리하며 이 사이트에는 저장되지 않습니다.",note:"결제 전 이용약관과 환불정책을 확인해 주세요.",error:"선택한 상품을 찾을 수 없습니다.",errName:"이름을 입력해 주세요.",errEmail:"올바른 이메일 주소를 입력해 주세요.",errPhone:"휴대폰 번호를 정확히 입력해 주세요.",errAgree:"필수 항목에 동의해 주세요.",openFail:"결제창을 열지 못했습니다. 다시 시도하거나 문의해 주세요.",
+    ko:{title:"주문 확인",lead:"상품과 금액을 확인한 후 토스페이먼츠 결제를 진행합니다.",summary:"선택 상품",type:"상품 유형",delivery:"제공 방식",billing:"결제 주기",orderRef:"주문번호",total:"총 결제금액",buyer:"구매자 정보",buyerHint:"주문 확인과 상품 전달에만 사용하며, 카드 정보는 입력받지 않습니다.",name:"이름",email:"이메일",emailHint:"디지털 상품·영수증이 이 주소로 발송됩니다.",phone:"휴대폰 번호",pay:"결제하기",fallback:"이메일로 상품 문의",fallbackLead:"온라인 결제는 준비 중입니다. 이메일로 상품 이용 가능 여부와 결제·제공 방법을 문의해 주세요.",mailAction:"메일 앱에서 내용을 확인하고 직접 보내야 문의가 접수됩니다. 이 화면에서는 결제되지 않으며, 주문은 회신 후 확정됩니다.",pending:"현재 온라인 결제를 준비 중입니다.",subscription:"정기 구독 이용 가능 여부와 결제 방법을 이메일로 확인해 주세요.",physical:"배송 가능 여부와 배송·결제 방법을 이메일로 확인해 주세요.",inquiryRef:"문의번호",inquiryPrice:"상품 표시 가격",inquirySecure:"이 화면에서 카드 정보를 입력하거나 결제하지 않습니다.",inquiryNote:"메일 앱이 열리지 않으면 아래 주소로 상품명과 문의번호를 보내 주세요.",support:"결제·주문 문의",back:"← 쇼핑 계속하기",secure:"카드 정보는 토스페이먼츠가 직접 처리하며 이 사이트에는 저장되지 않습니다.",note:"결제 전 이용약관과 환불정책을 확인해 주세요.",error:"선택한 상품을 찾을 수 없습니다.",errName:"이름을 입력해 주세요.",errEmail:"올바른 이메일 주소를 입력해 주세요.",errPhone:"휴대폰 번호를 정확히 입력해 주세요.",errAgree:"필수 항목에 동의해 주세요.",openFail:"결제창을 열지 못했습니다. 다시 시도하거나 문의해 주세요.",
       types:{course:"온라인 강의",subscription:"구독",book:"교재",live:"라이브 과정",consulting:"컨설팅"},
       deliveries:{digital:"디지털 제공",physical:"실물 배송",live:"실시간 온라인",in_person:"오프라인",appointment:"예약제"},
       billings:{one_time:"1회 결제",monthly:"매월",annual:"매년"}},
-    en:{title:"Review your order",lead:"Confirm the product and amount, then continue with TossPayments.",summary:"Selected product",type:"Product type",delivery:"Delivery",billing:"Billing",orderRef:"Order number",total:"Total",buyer:"Buyer information",buyerHint:"Used only for order confirmation and delivery. Card details are never entered here.",name:"Full name",email:"Email",emailHint:"Digital goods and the receipt are sent to this address.",phone:"Mobile number",pay:"Pay now",fallback:"Request order by email",pending:"The TossPayments client key is not connected yet, so checkout is temporarily using email orders.",subscription:"Recurring plans are pending billing-key integration and are handled by email for now.",physical:"Physical products require a confirmed shipping address and are handled by email for now.",support:"Payment & order support",back:"← Continue shopping",secure:"TossPayments processes card details directly. This site never stores them.",note:"Review the Terms and Refund Policy before payment.",error:"The selected product could not be found.",errName:"Please enter your name.",errEmail:"Please enter a valid email address.",errPhone:"Please enter a valid mobile number.",errAgree:"Please accept the required agreements.",openFail:"Could not open the payment window. Please retry or contact support.",
+    en:{title:"Review your order",lead:"Confirm the product and amount, then continue with TossPayments.",summary:"Selected product",type:"Product type",delivery:"Delivery",billing:"Billing",orderRef:"Order number",total:"Total",buyer:"Buyer information",buyerHint:"Used only for order confirmation and delivery. Card details are never entered here.",name:"Full name",email:"Email",emailHint:"Digital goods and the receipt are sent to this address.",phone:"Mobile number",pay:"Pay now",fallback:"Ask about this product by email",fallbackLead:"Online payment is being prepared. Email us to confirm availability, payment, and delivery.",mailAction:"Review and send the message in your email app to submit your inquiry. No payment is made here; your order is confirmed only after our reply.",pending:"Online payment is being prepared.",subscription:"Email us to confirm subscription availability and payment options.",physical:"Email us to confirm shipping availability and payment options.",inquiryRef:"Inquiry reference",inquiryPrice:"Listed product price",inquirySecure:"No card details or payment are collected on this page.",inquiryNote:"If your email app does not open, send the product name and inquiry reference to the address below.",support:"Payment & order support",back:"← Continue shopping",secure:"TossPayments processes card details directly. This site never stores them.",note:"Review the Terms and Refund Policy before payment.",error:"The selected product could not be found.",errName:"Please enter your name.",errEmail:"Please enter a valid email address.",errPhone:"Please enter a valid mobile number.",errAgree:"Please accept the required agreements.",openFail:"Could not open the payment window. Please retry or contact support.",
       types:{course:"Online course",subscription:"Subscription",book:"Book",live:"Live program",consulting:"Consulting"},
       deliveries:{digital:"Digital access",physical:"Physical shipping",live:"Live online",in_person:"In person",appointment:"By appointment"},
       billings:{one_time:"One-time",monthly:"Monthly",annual:"Annual"}}
@@ -167,10 +167,10 @@ h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color
   var diagnosisLine=diagnosis.grade?(lang==="en"
     ?"\nDiagnosis: grade="+diagnosis.grade+", experience="+diagnosis.experience+", goal="+diagnosis.goal+", recommendation="+diagnosis.recommendation
     :"\n진단 결과: 학년="+diagnosis.grade+", 경험="+diagnosis.experience+", 목표="+diagnosis.goal+", 추천="+diagnosis.recommendation):"";
-  var subject=(lang==="en"?"Order request: ":"상품 주문 신청: ")+product.name[lang]+" ["+orderRef+"]";
+  var subject=(lang==="en"?"Product inquiry: ":"상품 문의: ")+product.name[lang]+" ["+orderRef+"]";
   var orderBody=lang==="en"
-    ?"Order reference: "+orderRef+"\nProduct: "+product.name[lang]+"\nProduct ID: "+productId+"\nSKU: "+(product.sku||productId)+"\nPrice: KRW "+product.priceKRW+diagnosisLine
-    :"주문번호: "+orderRef+"\n상품명: "+product.name[lang]+"\n상품 ID: "+productId+"\nSKU: "+(product.sku||productId)+"\n표시 금액: "+new Intl.NumberFormat("ko-KR").format(product.priceKRW)+"원"+diagnosisLine;
+    ?"Inquiry reference: "+orderRef+"\nProduct: "+product.name[lang]+"\nProduct ID: "+productId+"\nSKU: "+(product.sku||productId)+"\nPrice: KRW "+product.priceKRW+diagnosisLine
+    :"문의번호: "+orderRef+"\n상품명: "+product.name[lang]+"\n상품 ID: "+productId+"\nSKU: "+(product.sku||productId)+"\n표시 금액: "+new Intl.NumberFormat("ko-KR").format(product.priceKRW)+"원"+diagnosisLine;
   var mailUrl="mailto:"+encodeURIComponent(config.supportEmail||"ceo@stargateedu.co.kr")+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(orderBody);
   document.getElementById("supportLink").href=mailUrl;
 
@@ -184,10 +184,16 @@ h1{color:var(--navy);font-size:clamp(28px,5vw,42px);margin:8px 0 6px}.lead{color
 
   function emailFallback(reason){
     buyerPanel.style.display="none";
+    document.getElementById("lead").textContent=copy.fallbackLead;
+    document.getElementById("orderRefLabel").textContent=copy.inquiryRef;
+    document.getElementById("totalLabel").textContent=copy.inquiryPrice;
+    document.getElementById("secureText").textContent=copy.inquirySecure;
+    document.getElementById("supportLink").textContent=config.supportEmail||"ceo@stargateedu.co.kr";
+    document.getElementById("note").textContent=copy.inquiryNote;
     var link=document.createElement("a");
     link.className="pay";link.href=mailUrl;link.id="payButton";link.textContent=copy.fallback;
     pay.parentNode.replaceChild(link,pay);
-    pending.textContent=reason;
+    pending.textContent=reason+" "+copy.mailAction;
   }
 
   if(!isTossProduct){ emailFallback(product.delivery==="physical"?copy.physical:copy.subscription); return; }
