@@ -1,18 +1,19 @@
 # Source of truth
 
-> **Canonical production repository**
+> **Staged replacement, not the current production deployment**
 
-- Domain: `shop.stargateedu.co.kr`
+- Intended domain: `shop.stargateedu.co.kr`
 - Role: STARGATE EDU commerce, course, and publication site
-- Repository: `DongsooJung/stargateedu-shop`
-- Effective date: 2026-08-05
+- Current live source: `DongsooJung/stargate-shop-redirect` (GitHub Pages from `main`)
+- This repository: `DongsooJung/stargateedu-shop`, prepared for a future migration
+- Live response checked against the current source on 2026-10-16
 
 ## Editing policy
 
-1. Make production changes in this repository only.
-2. Do not overwrite `main` from `DongsooJung/DongsooJung` snapshot or `mirror/*` branches.
-3. Use environment variables or GitHub Secrets for credentials.
-4. Validate the live domain after changes that affect deployment.
-5. If this source moves, update `DongsooJung/DongsooJung/DOMAIN_SOURCES.md` and the Notion GitHub dashboard.
+1. Apply current production storefront changes in `DongsooJung/stargate-shop-redirect`.
+2. Keep this repository's storefront as a staged replacement until the custom domain and GitHub Pages source are explicitly migrated.
+3. Do not overwrite either repository's `main` from `DongsooJung/DongsooJung` snapshots or `mirror/*` branches.
+4. Keep credentials and payment secret keys out of committed files.
+5. When the migration occurs, update this file, `DongsooJung/DongsooJung/DOMAIN_SOURCES.md`, and the Notion GitHub dashboard in the same change window.
 
-The profile repository may retain reference snapshots, but those snapshots are not authorized deployment sources.
+The `CNAME` file in this repository prepares the intended domain; it does not establish the current live deployment source.
