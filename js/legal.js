@@ -1,7 +1,7 @@
 /**
  * 전자상거래법 사업자 정보 푸터 렌더러.
  * <div id="bizFooter"></div> 가 있는 페이지에 자동으로 표기를 주입한다.
- * STARGATE_BUSINESS 의 빈 값은 렌더링하지 않는다(미기재 상태를 눈에 띄게 남긴다).
+ * STARGATE_BUSINESS 의 빈 값은 렌더링하지 않는다.
  */
 (function () {
   "use strict";
@@ -11,15 +11,24 @@
   var biz = window.STARGATE_BUSINESS || {};
   var en = new URLSearchParams(location.search).get("lang") === "en";
   var labels = en
-    ? { companyName: "Company", ceoName: "Representative", bizRegNo: "Business registration no.", mailOrderNo: "Mail-order sales registration no.", address: "Address", phone: "Phone", email: "Email", privacyOfficer: "Privacy officer", hostingProvider: "Hosting" }
-    : { companyName: "상호", ceoName: "대표자", bizRegNo: "사업자등록번호", mailOrderNo: "통신판매업신고번호", address: "주소", phone: "전화", email: "이메일", privacyOfficer: "개인정보 보호책임자", hostingProvider: "호스팅 제공자" };
+    ? { companyName: "Company", ceoName: "Representative", bizRegNo: "Business registration no.", mailOrderNo: "Mail-order sales registration no.", address: "Address", phone: "Phone", mobile: "Payment line", email: "Email", privacyOfficer: "Privacy officer", hostingProvider: "Hosting" }
+    : { companyName: "상호", ceoName: "대표자", bizRegNo: "사업자등록번호", mailOrderNo: "통신판매업신고번호", address: "주소", phone: "대표 전화", mobile: "결제 전화", email: "이메일", privacyOfficer: "개인정보 보호책임자", hostingProvider: "호스팅 제공자" };
 
-  var order = ["companyName", "ceoName", "bizRegNo", "mailOrderNo", "address", "phone", "email", "privacyOfficer", "hostingProvider"];
+  var order = ["companyName", "ceoName", "bizRegNo", "mailOrderNo", "address", "phone", "mobile", "email", "privacyOfficer", "hostingProvider"];
   var parts = order
     .filter(function (key) { return typeof biz[key] === "string" && biz[key].trim(); })
     .map(function (key) {
       var span = document.createElement("span");
-      span.textContent = labels[key] + " " + biz[key].trim();
+      var value = biz[key].trim();
+      if (key === "phone" || key === "mobile") {
+        var link = document.createElement("a");
+        link.href = "tel:+82" + value.replace(/[^0-9]/g, "").replace(/^0/, "");
+        link.textContent = value;
+        span.appendChild(document.createTextNode(labels[key] + " "));
+        span.appendChild(link);
+      } else {
+        span.textContent = labels[key] + " " + value;
+      }
       return span;
     });
 
